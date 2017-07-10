@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="1800">
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="logs/${project.artifactId}.log"
+                     filePattern="logs/${project.artifactId}/$${date:yyyy-MM}/%d{dd-MM-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} [%L] - %msg%n" />
+            <SizeBasedTriggeringPolicy size="100 MB"/>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} [%L] - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache" level="error" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.springframework" level="error" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <logger name="java.sql.ResultSet" level="error" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </logger>
+        <logger name="com.spider" level="${log4j.level}" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+        <AsyncRoot level="${log4j.level}">
+            <AppenderRef ref="RollingFile"/>
+           <!-- <AppenderRef ref="Console"/>-->
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,46 @@
+{
+	"id": 3024972858265603,
+	"context": "http://cqfy.chinacourt.org/",
+	"index": "article/index/id/M8jKNTAwMiAOAAA%3D.shtml",
+	"configs": [
+		{
+			"article": true,
+			"reg": "article/detail/\\d+/\\d+/id/\\d+.shtml",
+			"js": {
+				"title": [
+					"document.getElementsByClassName('b_title')[0].textContent"
+				],
+				"head": [
+					"document.getElementsByClassName('sth_a')[0].getElementsByTagName('span')[0].textContent.trim()"
+				],
+				"body": [
+					"(function(){if(document.getElementsByClassName('image')[0]){return document.getElementsByClassName('image')[0].innerHTML+' '+document.getElementsByClassName('text')[0].innerHTML;}else{return document.getElementsByClassName('text')[0].innerHTML;}})()"
+				],
+				"author": [
+					"document.getElementsByClassName('sth_b')[0].textContent.split('来源：')[1].split(' ')[0]"
+				],
+				"ptime": [
+					"document.getElementsByClassName('sth_a')[0].getElementsByTagName('span')[0].textContent.split('发布时间：')[1].trim()"
+				]
+			}
+		},
+		{
+			"article": false,
+			"reg": "article/index/id/\\w+%3D.shtml",
+			"js": {
+				"links": [
+					"document.getElementsByClassName('font14')[0].innerHTML"
+				]
+			}
+		},
+		{
+			"article": false,
+			"uri": "article/index/id/M8jKNTAwMiAOAAA%3D.shtml",
+			"js": {
+				"links": [
+					"document.getElementById('list').innerHTML"
+				]
+			}
+		}
+	]
+}

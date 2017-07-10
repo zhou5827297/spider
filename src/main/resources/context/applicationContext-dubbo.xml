@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans          
+    http://www.springframework.org/schema/beans/spring-beans.xsd          
+    http://code.alibabatech.com/schema/dubbo          
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <dubbo:application name="spider"/>
+
+    <dubbo:registry address="N/A"/>
+
+    <dubbo:protocol name="dubbo" port="2000" accepts="800" threads="500"/>
+
+    <context:property-placeholder file-encoding="UTF-8" location="classpath*:conf/remote.properties"/>
+
+<!--    <dubbo:reference interface="com.spider.dubbo.service.SpiderSyncService" id="spiderSyncService" check="false"
+                     url="${DUBBO.FETCH.ADDRESS}" timeout="30000"></dubbo:reference>-->
+
+    <dubbo:reference interface="com.zhoukai.service.monitor.ProcessService" id="processService" check="false"
+                     url="${DUBBO.MONITOR.ADDRESS}" timeout="10000"></dubbo:reference>
+    <dubbo:reference interface="com.zhoukai.service.monitor.SiteService" id="siteService" check="false"
+                     url="${DUBBO.MONITOR.ADDRESS}" timeout="10000"></dubbo:reference>
+    <dubbo:reference interface="com.zhoukai.service.monitor.TaskPushService" id="taskPushService" check="false"
+                     url="${DUBBO.MONITOR.ADDRESS}" timeout="10000"></dubbo:reference>
+    <dubbo:reference interface="com.zhoukai.service.monitor.TaskService" id="taskService" check="false"
+                     url="${DUBBO.MONITOR.ADDRESS}" timeout="10000"></dubbo:reference>
+
+</beans>

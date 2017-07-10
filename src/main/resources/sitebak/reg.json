@@ -1,0 +1,58 @@
+{
+  "sourceId": "3016825468199073",
+  "request": {
+    "protocol": "http",
+    "dynamic ": "0",
+    "method": "get",
+    "body": "",
+    "header": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Cache-Control": "max-age=0",
+      "Host": "news.xinhuanet.com",
+      "Upgrade-Insecure-Requests": "1"
+    },
+    "url": "http://news.xinhuanet.com/politics",
+    "reg": "http://news.xinhuanet.com/politics.*.htm",
+    "urlArg": {
+      "encoding": "utf-8",
+      "f": "8"
+    }
+  },
+  "response": {
+    "articleId": ".*c_(\\d+).htm",
+    "type": "html",
+    "html": {
+      "title": {
+        "#title": ""
+      },
+      "publishDate": {
+        "#article span.time": "",
+        "#pubtime": ""
+      },
+      "source": {
+        "#source": "：(.*)"
+      },
+      "content": {
+        "div.article@html": "",
+        "#content@html": ""
+      }
+    },
+    "json": {
+      "userId": {
+        "id": "reg"
+      },
+      "uesrname": {
+        "name": "reg"
+      }
+    },
+    "jsonp": {
+      "userId": {
+        "id": "reg"
+      }
+    },
+    "uesrname": {
+      "name": "reg"
+    }
+  }
+}
+}

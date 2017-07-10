@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>spider</title>
+    <link rel="stylesheet" type="text/css" href="css/proxy.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    .
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script>
+        var ROOTPATH = "http://xxxx/html/";
+        var REMOTEPATH = "http://xxxxx/";
+        var dealResponse = function (response) {
+            angular.forEach(response.d, function (data, index, array) {
+                var url = hex_md5(data.url).toUpperCase();
+                var path = ROOTPATH + data.sourceId + "/" + url + ".html";
+                data.path = path;
+            });
+            return response;
+        }
+
+        var app = angular.module('articleApp', []);
+        app.controller('articleCtrl', function ($scope, $http, $location) {
+            $scope.col = 'ip';
+            $scope.desc = 0;
+            var title = $location.absUrl().match(/title=(.*)/);
+            if (title && title[1] != ('undefined')) {
+                $http.get(REMOTEPATH + "xxxx/get?where=title+like+%25" + title[1] + "%25")
+                        .success(function (response) {
+                            dealResponse(response);
+                            $scope.articles = response.d;
+                            $scope.articleTotal = response.t;
+                        });
+            } else {
+                $http.get(REMOTEPATH + "xxxx/get?p=1&l=1000&orderBy=create_time%20desc&isOpen=false&tagFinish=false")
+                        .success(function (response) {
+                            dealResponse(response);
+                            $scope.articles = response.d;
+                            $scope.articleTotal = response.t;
+                        });
+            }
+            $scope.search = function () {
+                var title = $scope.title;
+                location.href = "?title=" + title;
+            }
+
+        });
+    </script>
+</head>
+<body>
+<div ng-app="articleApp" ng-controller="articleCtrl">
+    <table>
+        <caption>
+            <h3>目前抓取总数量 {{articleTotal}}</h3>
+            <div>
+                <input type="text" ng-model="title"/>
+                <button type="button" class="btn green" ng-click="search()">标题查询</button>
+            </div>
+        </caption>
+        <tr>
+            <th>sequence</th>
+            <th ng-click="col='id';desc=!desc">id</th>
+            <th ng-click="col='title';desc=!desc">title</th>
+            <th ng-click="col='head';desc=!desc">head</th>
+            <th ng-click="col='url';desc=!desc">url</th>
+            <th ng-click="col='sourceId';desc=!desc">sourceId</th>
+            <th ng-click="col='author';desc=!desc">author</th>
+            <th ng-click="col='createTime';desc=!desc">createTime</th>
+            <th>snapshop</th>
+            <th>view</th>
+        </tr>
+        <tr ng-repeat="article in articles | orderBy:col:desc" onmouseover="style.backgroundColor='#FF9900'"
+            onmouseout="style.backgroundColor='#FFFFFF'">
+            <td>{{$index+1}}</td>
+            <td>{{article.id}}</td>
+            <td>{{article.title}}</td>
+            <td>{{article.head}}</td>
+            <td><a href="{{article.url}}" target="_blank">{{article.url}}</a></td>
+            <td>{{article.sourceId}}</td>
+            <td>{{article.author}}</td>
+            <td>{{article.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td><a href="{{article.path}}" target="_blank">抓取快照</a></td>
+            <td><a href="body.html?#articleId={{article.id}}" target="_blank">正文</a></td>
+        </tr>
+    </table>
+</div>
+</body>

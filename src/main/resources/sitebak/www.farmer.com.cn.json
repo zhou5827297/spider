@@ -1,0 +1,42 @@
+{
+	"id": 3025818145404930,
+	"context": "http://www.farmer.com.cn/",
+	"index": "sh/sh1/shxw/",
+	"configs": [
+		{
+			"article": true,
+			"reg": "sh/sh1/\\w+/\\d+/t\\d+_\\d+.htm",
+			"js": {
+				"title": [
+					"document.getElementsByTagName('h1')[0].textContent.trim()"
+				],
+				"head": [
+					"document.getElementsByClassName('wlaiyuan')[0].textContent.trim()"
+				],
+				"body": [
+					"(function(){var strCon=document.getElementsByClassName('TRS_Editor')[0].getElementsByTagName('img'); for(var i=0;i<strCon.length;i++){ var img=strCon[i].src; strCon[i].src=img; }; var a1=document.getElementsByClassName('TRS_Editor')[0].innerHTML;return a1; })()"
+				],
+				"author": [
+					"document.getElementsByClassName('wlaiyuan')[0].textContent.trim().split('：')[2].trim()"
+				],
+				"ptime": [
+					"document.getElementsByClassName('wlaiyuan')[0].textContent.trim().split('|')[0].trim()"
+				]
+			}
+		},
+		{
+			"article": false,
+			"uri": "sh/sh1/shxw/",
+			"date": {
+				"regex": "\\d{4}.\\d{2}.\\d{2}",
+				"format": "yyyy.MM.dd"
+			},
+			"js": {
+				"links": [
+					"document.getElementsByClassName('list-list')[0].innerHTML"
+				]
+			}
+		}
+		
+	]
+} 

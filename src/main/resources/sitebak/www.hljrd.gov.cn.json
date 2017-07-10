@@ -1,0 +1,35 @@
+{
+  "id": 3024754358016002,
+  "context": "http://news.cjn.cn/gnxw/201610/t2907736.htm",
+  "index": "",
+  "configs": [
+    {
+      "article": true,
+      "reg": "",
+      "timeout": 20,
+      "page": {
+        "countReg": "document.getElementsByClassName('page')[0].getElementsByTagName('script')[0].innerHTML.substring(15,document.getElementsByClassName('page')[0].getElementsByTagName('script')[0].innerHTML.indexOf(','))",
+        "currentPage": "/(\\w+).htm",
+        "split": "_",
+        "subfix": ".htm",
+        "increment": "1",
+        "index": "pageIndex",
+        "format": "${currentPage}${split}${index}"
+      },
+      "js": {
+        "head": [
+          "document.getElementsByClassName('art-title')[0].innerHTML.trim()"
+        ],
+        "author": [
+          "document.getElementsByClassName('sour')[0].innerHTML.trim()"
+        ],
+        "body": [
+          "document.getElementsByClassName('art-main')[0].outerHTML.trim()"
+        ],
+        "title": [
+          "document.getElementsByClassName('art-title')[0].innerHTML.trim()"
+        ]
+      }
+    }
+  ]
+}

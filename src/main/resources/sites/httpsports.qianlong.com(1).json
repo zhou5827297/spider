@@ -1,0 +1,57 @@
+{
+	"id": 3023233385705474,
+	"context": "http://sports.qianlong.com/",
+	"index": "",
+	"configs": [
+		{
+			"article": true,
+			"reg": "http://sports.qianlong.com/.*?.shtml",
+			"js": {
+				"title": [
+					"document.getElementsByTagName('h1')[0].textContent"
+				],
+				
+				"head": [
+					"document.getElementsByClassName('blockInfo')[0].innerText"
+				],
+				"author": [
+					"document.getElementsByClassName('source')[0].textContent"
+				],
+				"ptime": [
+					"document.getElementsByClassName('pubDate')[0].textContent"
+				],
+				"body": [
+					"document.getElementsByClassName('sourceTitle')[0].innerHTML+document.getElementsByClassName('blockContent fontSize2')[0].innerHTML"
+				]
+			},
+			"page": {
+				"countReg": "var ele=document.getElementsByClassName('page')[0].getElementsByTagName('a');ele[ele.length-3].innerHTML",
+				"currentPage": "/(\\w+).shtml",
+				"increment": "1",
+				"format": "${currentPage}(_${index}).shtml"
+			}
+		},
+		{
+			"article": false,
+			"reg": "\\w+/",
+			"date": {
+				"regex": "\\d{4}/\\d{2}\\d{2}",
+				"format": "yyyy/MMdd"
+			},
+			"js": {
+				"links": [
+					"(function(){if(document.getElementsByClassName('pagination pagination-centered')[0]){var str1=document.getElementsByClassName('pagination pagination-centered')[0].innerHTML;return document.getElementById('mainContent').innerHTML.replace(str1,'');}else{return document.getElementById('mainContent').innerHTML;}})()"
+				]
+			}
+		},
+		{
+			"article": false,
+			"uri": "",
+			"js": {
+				"links": [
+					"document.getElementsByClassName('nav')[1].innerHTML"
+				]
+			}
+		}
+	]
+}

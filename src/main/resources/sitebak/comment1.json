@@ -1,0 +1,52 @@
+{
+  "sourceId": "3023216108189698",
+  "request": {
+    "articleId": ".*c_(\\d+).htm",
+    "url": "http://comment.home.news.cn/a/newsComm.do?callback=jsonp51&newsId=1-${articleId}",
+    "header": {
+    }
+  },
+  "response": {
+    "type": "json",
+    "html": {
+      "list": ".dl-section",
+      "title": {
+        "#title": ""
+      },
+      "publishDate": {
+        "#article span.time": "",
+        "#pubtime": ""
+      },
+      "source": {
+        "#source": "：(.*)"
+      },
+      "content": {
+        "div.article@html": "",
+        "#content@html": ""
+      }
+    },
+    "json": {
+      "list": "contentAll",
+      "userId": {
+        "userId": ""
+      },
+      "nickName": {
+        "nickName": ""
+      },
+      "content": {
+        "content": ""
+      },
+      "userImg": {
+        "userImgUrl": ""
+      },
+      "clickLikes": {
+        "upAmount": ""
+      }
+    },
+    "jsonp": {
+      "userId": {
+        "id": "reg"
+      }
+    }
+  }
+}

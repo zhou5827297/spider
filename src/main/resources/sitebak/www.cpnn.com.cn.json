@@ -1,0 +1,43 @@
+{
+  "id": 3027413142446083,
+  "context": "http://www.cpnn.com.cn/",
+  "index": "dlcj/default.htm",
+  "configs": [
+    {
+      "article": true,
+      "reg": "http://www.cpnn.com.cn/.*?.html",
+      "js": {
+        "title": [
+          "document.getElementsByTagName('h1')[0].textContent.trim()"
+        ],
+        "head": [
+          "document.getElementsByClassName('cpnn-zhengwen-time')[0].textContent.trim()"
+        ],
+        "author": [
+
+          "document.getElementsByClassName('cpnn-zhengwen-time')[0].textContent.split('来源：')[1].split('日期')[0].trim()"
+        ],
+        "body": [
+          "document.getElementsByClassName('cpnn-con-zhenwen')[0].innerHTML.split('<p align=\"center\">')[0]"
+        ],
+        "ptime": [
+          "'20'+document.getElementsByClassName('cpnn-zhengwen-time')[0].textContent.split('日期：')[1].trim()"
+        ]
+      }
+    },
+    {
+      "article": false,
+      "uri": "dlcj/default.htm",
+      "date": {
+        "regex": "\\d{4}\\d{2}\\d{2}",
+        "format": "yyyyMMdd"
+      },
+
+      "js": {
+        "links": [
+          "document.getElementsByClassName('cpnn-content-left-list')[0].getElementsByTagName('ul')[0].innerHTML"
+        ]
+      }
+    }
+  ]
+}

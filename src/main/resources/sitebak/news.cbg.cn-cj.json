@@ -1,0 +1,45 @@
+{
+  "id": 3028690563166210,
+  "context": "http://epaper.cpd.com.cn/szb/${NOWDATE}",
+  "index": "/info.cfg",
+  "replaceArgs": "{'NOWDATE':'yyyyMMdd'}",
+  "configs": [
+    {
+      "article": true,
+      "reg": "http://epaper.cpd.com.cn.*.xml",
+      "js": {
+        "title": [
+          "Title | Title"
+        ],
+        "head": [
+          "SubTitle | SubTitle"
+        ],
+        "body": [
+          "Content | Content + ImageList > Img | Img@abs:Name"
+        ],
+        "author": [
+          "Source | Source"
+        ],
+        "ptime": [
+          "${NOWDATE}"
+        ],
+        "links": [
+          "ArticleList > Article"
+        ]
+      }
+    },
+    {
+      "article": false,
+      "uri": "/info.cfg",
+      "date": {
+        "regex": "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}",
+        "format": "yyyy-MM-dd HH:mm"
+      },
+      "js": {
+        "links": [
+          "PageList > Page | Page@abs:XML"
+        ]
+      }
+    }
+  ]
+}
