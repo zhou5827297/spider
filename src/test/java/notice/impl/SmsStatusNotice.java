@@ -96,12 +96,12 @@
 //     */
 //    private void sendSms(String phone, String tplData) {
 //        try {
-//            IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAII5LjIr88Ga7n", "LuAyNMDQhAcpny3oeZkcHT7caecVGK");
-//            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
+//            IClientProfile profile = DefaultProfile.getProfile("xxxx-xxxx", "xxxx", "xxxx");
+//            DefaultProfile.addEndpoint("cn-hangzhou", "xxxx-xxxx", "Sms", "xxx.xxx.xxx");
 //            IAcsClient client = new DefaultAcsClient(profile);
 //            SingleSendSmsRequest request = new SingleSendSmsRequest();
 //            request.setSignName("温馨提示");
-//            request.setTemplateCode("SMS_34505023");
+//            request.setTemplateCode("xxx");
 //            request.setParamString(tplData);
 //            request.setRecNum(phone);
 ////            SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
